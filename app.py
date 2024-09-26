@@ -41,9 +41,3 @@ if __name__ == "__main__":
 
     transcript = get_youtube_transcript(video_id)
 
-    if transcript:
-        print("Transcript:")
-        print(transcript)
-    else:
-        print("Transcript not available for this video.")
-
