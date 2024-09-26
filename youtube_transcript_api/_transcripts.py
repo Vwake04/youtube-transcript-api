@@ -96,6 +96,7 @@ class TranscriptListFetcher(object):
             'Connection': 'keep-alive',
             'Upgrade-Insecure-Requests': '1'
         }
+        print(headers)
         response = self._http_client.get(WATCH_URL.format(video_id=video_id), headers=headers)
         return unescape(_raise_http_errors(response, video_id).text)
 
