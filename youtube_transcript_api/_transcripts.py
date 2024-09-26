@@ -49,8 +49,6 @@ class TranscriptListFetcher(object):
         )
 
     def _extract_captions_json(self, html, video_id):
-        print(f"{html=}")
-        return 
         splitted_html = html.split('"captions":')
 
         if len(splitted_html) <= 1:
@@ -68,7 +66,6 @@ class TranscriptListFetcher(object):
         captions_json = json.loads(
             splitted_html[1].split(',"videoDetails')[0].replace('\n', '')
         ).get('playerCaptionsTracklistRenderer')
-        print(f"{captions_json=}")
         if captions_json is None:
             raise TranscriptsDisabled(video_id)
 
@@ -102,8 +99,6 @@ class TranscriptListFetcher(object):
             'Upgrade-Insecure-Requests': '1'
         }
         print(headers)
-        print(WATCH_URL.format(video_id=video_id))
-        input("Enter to continue")
         response = self._http_client.get(WATCH_URL.format(video_id=video_id), headers=headers)
         print(f"{response.headers=}")
         return unescape(_raise_http_errors(response, video_id).text)
@@ -315,6 +310,8 @@ class Transcript(object):
             'Upgrade-Insecure-Requests': '1'
         }
 
+        print(f"{self._url=}")
+        input("Press Enter to continue...")
         response = self._http_client.get(self._url, headers=headers)
         print(f"{response.headers=}")
         return _TranscriptParser(preserve_formatting=preserve_formatting).parse(
