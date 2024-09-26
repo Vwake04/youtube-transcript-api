@@ -98,6 +98,7 @@ class TranscriptListFetcher(object):
         }
         print(headers)
         response = self._http_client.get(WATCH_URL.format(video_id=video_id), headers=headers)
+        print(f"{response.headers=}")
         return unescape(_raise_http_errors(response, video_id).text)
 
 
@@ -308,6 +309,7 @@ class Transcript(object):
         }
 
         response = self._http_client.get(self._url, headers=headers)
+        print(f"{response.headers=}")
         return _TranscriptParser(preserve_formatting=preserve_formatting).parse(
             _raise_http_errors(response, self.video_id).text,
         )
